@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import HomeScreen from './assets/screens/Home'
+import AboutScreen from './assets/screens/About'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-export default function App() {
+const Tab = createMaterialBottomTabNavigator()
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator
+        barStyle={{ backgroundColor: '#353535' }}
+        activeColor="white"
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen} //Home Screen
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={28} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Quotes"
+          component={AboutScreen} // About Screen
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="shuffle" color={color} size={28} />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
